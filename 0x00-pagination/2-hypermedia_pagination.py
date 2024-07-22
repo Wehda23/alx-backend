@@ -29,8 +29,10 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Method to retrieve the pages"""
-        assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0
+        if not isinstance(page, int) or page <= 0:
+            raise ValueError("Page number must be a positive integer")
+        if not isinstance(page_size, int) or page_size <= 0:
+            raise ValueError("Page size must be a positive integer")
 
         dataset: List[List] = self.dataset()
         content_indexs: Tuple[int, int] = index_range(page, page_size)
@@ -45,7 +47,8 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
         """
         Method that takes the same arguments (and defaults)
-          as get_page and returns a dictionary containing the following key-value pairs
+          as get_page and returns a dictionary containing the
+          following key-value pairs
         """
         data: List[List] = self.get_page(page, page_size)
         total_pages: int = math.ceil(len(self.dataset()) / page_size)
