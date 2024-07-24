@@ -1,0 +1,1 @@
+# Cache concept implementation
