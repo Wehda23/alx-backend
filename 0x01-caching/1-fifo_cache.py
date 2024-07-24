@@ -2,7 +2,7 @@
 """
 Module contains class BasicCache
 """
-
+from collections import OrderedDict
 
 BaseCaching = __import__("base_caching").BaseCaching
 
@@ -18,20 +18,16 @@ class FIFOCache(BaseCaching):
         Class Constructor
         """
         super().__init__()
-        self.queue = []
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """Add an item in the cache"""
         if key and item:
-            self.queue.append(key)
             self.cache_data[key] = item
-            if len(self.cache_data) > self.MAX_ITEMS:
-                discard_key = self.queue.pop(0)
-                del self.cache_data[discard_key]
-                print("DISCARD: {}".format(key))
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+                discared, _ = self.cache_data.popitem(False)
+                print("DISCARD:", discared)
 
     def get(self, key):
         """Get an item by key"""
-        if key is None:
-            return None
         return self.cache_data.get(key, None)
