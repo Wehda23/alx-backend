@@ -4,7 +4,7 @@ Module to launch the flask application
 Task 2
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 from typing import Any
 
 
@@ -42,8 +42,11 @@ def home() -> Any:
     Returns:
         HTML: `0-index.html` in the `./templates` directory
     """
-
-    return render_template("3-index.html")
+    home_title = gettext("home_title")
+    home_header = gettext("home_header")
+    return render_template(
+        "3-index.html", home_title=home_title, home_header=home_header
+    )
 
 
 if __name__ == "__main__":
