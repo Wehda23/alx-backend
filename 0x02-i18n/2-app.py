@@ -43,7 +43,7 @@ def home() -> Any:
         HTML: `0-index.html` in the `./templates` directory
     """
 
-    return render_template("0-index.html")
+    return render_template("2-index.html")
 
 
 if __name__ == "__main__":
