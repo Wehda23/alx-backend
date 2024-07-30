@@ -31,7 +31,9 @@ def get_locale() -> str:
     Returns:
         str: best match
     """
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
+    return request.accept_languages.best_match(
+        app.config["LANGUAGES"]
+    )
 
 
 @app.route("/")
